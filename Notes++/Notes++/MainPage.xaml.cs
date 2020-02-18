@@ -17,5 +17,29 @@ namespace Notes__
         {
             InitializeComponent();
         }
+
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            ListView.ItemsSource = await App.Database.GetNotesAsync();
+        }
+        async void OnNoteAddedClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NotesEntryPage
+            {
+                BindingContext = new Note()
+            });
+        }
+
+        async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem != null)
+            {
+                await Navigation.PushAsync(new NotesPage
+                {
+                    BindingContext = e.SelectedItem as Note
+                });
+            }
+        }
     }
 }

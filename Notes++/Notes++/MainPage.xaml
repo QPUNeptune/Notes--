@@ -6,11 +6,22 @@
              mc:Ignorable="d"
              x:Class="Notes__.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
-    </StackLayout>
+    <ContentPage.Resources>
+        <Style TargetType="{x:Type ListView}">
+            <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="New" Clicked="OnNoteAddedClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ListView x:Name="ListView" Margin="{StaticResource PageMargin}" ItemSelected="OnListViewItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Text}" TextColor="{StaticResource TextColor}" Detail="{Binding Date}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
 
 </ContentPage>
