@@ -4,8 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Notesplusplus.NotesEntryPage"
-             Title="Note Entry">
+             x:Class="Notesplusplus.NotePage"
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <Style TargetType="{x:Type Editor}">
             <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
@@ -17,15 +17,12 @@
             <Setter Property="CornerRadius" Value="5"/>
         </Style>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" Clicked="OnEditClicked" ></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <StackLayout>
-        <Entry Text="{Binding Title}"
-               Placeholder="Title" />
+        <Image Aspect="AspectFit" Source="{Binding ImagePath}" />
         <Editor Text="{Binding Text}"
-                Placeholder="Write your note..."
-                HeightRequest="100" />
-        <Grid>
-            <Button Text="Save" Clicked="OnSaveButtonClicked" />
-            <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked" />
-        </Grid>
+                HeightRequest="100" IsReadOnly="True" />
     </StackLayout>
 </ContentPage>

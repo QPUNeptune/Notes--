@@ -1,10 +1,9 @@
 ﻿using System;
 using System.IO;
-using Notes__.Database;
+using Notesplusplus.Database;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
-namespace Notes__
+namespace Notesplusplus
 {
     public partial class App : Application
     {

@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Notes__
+namespace Notesplusplus
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class NotesEntryPage : ContentPage
@@ -17,14 +12,18 @@ public partial class NotesEntryPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void OnSaveButtonClicked(object sender, EventArgs e)
+	async void OnSaveButtonClicked(object sender, EventArgs e)
+    {
+        var note = (Models.Note) BindingContext;
+		note.ModificationTime = DateTime.Now;
+        await App.Database.SaveNoteAsync(note);
+        await Navigation.PopAsync();
+    }
+    async void OnDeleteButtonClicked(object sender, EventArgs e)
 	{
-		throw new NotImplementedException();
-	}
-
-	private void OnDeleteButtonClicked(object sender, EventArgs e)
-	{
-		throw new NotImplementedException();
-	}
+		var note = (Models.Note) BindingContext;
+        await App.Database.DeleteNoteAsync(note);
+        await Navigation.PopAsync();
+    }
 }
 }

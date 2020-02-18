@@ -88,9 +88,9 @@
     <Folder Include="Resources\drawable\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Notes++\Notes++.csproj">
-      <Project>{7C8C8D17-04BE-4A27-AB2D-0B0DCE80A017}</Project>
-      <Name>Notes++</Name>
+    <ProjectReference Include="..\Notes++\Notesplusplus.csproj">
+      <Project>{5127B584-6F5F-44F1-AEE9-4C829C63A1FE}</Project>
+      <Name>Notesplusplus</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

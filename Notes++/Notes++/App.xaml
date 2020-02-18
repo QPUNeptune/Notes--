@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Notes__.App">
+             x:Class="Notesplusplus.App">
     <Application.Resources>
         <Color x:Key="PageBackgroundColor">DarkGray</Color>
         <Style TargetType="{x:Type d:NavigationPage}">

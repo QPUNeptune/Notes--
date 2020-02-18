@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Notesplusplus.Models;
 using SQLite;
 
-namespace Notes__.Database
+namespace Notesplusplus.Database
 {
     public class NotesDB
     {

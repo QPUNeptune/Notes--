@@ -4,8 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Notes__.MainPage">
-
+             x:Class="Notesplusplus.MainPage"
+             Title="Notes">
     <ContentPage.Resources>
         <Style TargetType="{x:Type ListView}">
             <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
@@ -15,13 +15,12 @@
         <ToolbarItem Text="New" Clicked="OnNoteAddedClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <ListView x:Name="ListView" Margin="{StaticResource PageMargin}" ItemSelected="OnListViewItemSelected">
+        <ListView x:Name="ListView" ItemSelected="OnListViewItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Text}" TextColor="{StaticResource TextColor}" Detail="{Binding Date}" />
+                    <TextCell Text="{Binding Text}" Detail="{Binding CreationTime}"  />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </ContentPage.Content>
-
 </ContentPage>
