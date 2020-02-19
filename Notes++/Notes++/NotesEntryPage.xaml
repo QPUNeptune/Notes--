@@ -12,17 +12,19 @@
         </Style>
         <Style TargetType="Button" ApplyToDerivedTypes="True" CanCascade="True">
             <Setter Property="FontSize" Value="Small"/>
-            <Setter Property="BackgroundColor" Value="LightGray"/>
-            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="TextColor" Value="White"/>
             <Setter Property="CornerRadius" Value="5"/>
         </Style>
     </ContentPage.Resources>
     <StackLayout>
+        <ImageButton Source="{Binding ImagePath}" Clicked="AddNewImage" Aspect="AspectFit" WidthRequest="100"/>
         <Entry Text="{Binding Title}"
                Placeholder="Title" />
         <Editor Text="{Binding Text}"
                 Placeholder="Write your note..."
                 HeightRequest="100" />
+        
         <Grid>
             <Button Text="Save" Clicked="OnSaveButtonClicked" />
             <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked" />

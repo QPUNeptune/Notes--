@@ -18,7 +18,16 @@
         <ListView x:Name="ListView" ItemSelected="OnListViewItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Text}" Detail="{Binding CreationTime}"  />
+                    <ViewCell>
+                        <Grid>
+                            <Image Grid.RowSpan="2" Source="{Binding ImagePath}"></Image>
+                            <Label Grid.Column="1" Text="{Binding Title}" />
+                            <Label Grid.Column="2" Grid.Row="0" Text="Modification Time:" FontSize="9"  />
+                            <Label Grid.Column="2" Grid.Row="1" Text="Creation Time:" FontSize="9" />
+                            <Label Grid.Column="3" Grid.Row="0" Text="{Binding ModificationTime}" FontSize="7"  />
+                            <Label Grid.Column="3" Grid.Row="1" Text="{Binding CreationTime}" FontSize="7" />
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

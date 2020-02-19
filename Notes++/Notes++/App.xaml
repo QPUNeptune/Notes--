@@ -12,7 +12,7 @@
             <Setter Property="BarTextColor" Value="White" />
         </Style>
         <Style TargetType="{x:Type ContentPage}" ApplyToDerivedTypes="True">
-            <Setter Property="BackgroundColor" Value="Black"/>
+            <Setter Property="BackgroundColor" Value="DarkGray"/>
         </Style>
     </Application.Resources>
 </Application>

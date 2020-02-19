@@ -24,7 +24,7 @@ namespace Notesplusplus
         {
             await Navigation.PushAsync(new NotesEntryPage
             {
-                BindingContext = new Note()
+                BindingContext = new Note{IsNew = true, ImagePath = "Plus.png"}
             });
         }
 

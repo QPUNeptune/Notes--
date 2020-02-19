@@ -12,5 +12,6 @@ namespace Notesplusplus.Models
         public string ImagePath { get; set; }
         public DateTime CreationTime { get; set; }
         public DateTime ModificationTime { get; set; }
+        public bool IsNew { get; set; }
     }
 }
