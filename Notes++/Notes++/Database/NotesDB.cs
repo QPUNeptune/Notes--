@@ -25,6 +25,11 @@ namespace Notesplusplus.Database
             return await _dbConnection.Table<Note>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task<Note> GetNotesSearchAsync(string searchString)
+        {
+            return await _dbConnection.Table<Note>().Where(i => i.Title.Contains(searchString)).FirstOrDefaultAsync();
+        }
+
         public async Task<int> SaveNoteAsync(Note note)
         {
             if (note.Id != 0)

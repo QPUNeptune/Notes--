@@ -20,15 +20,17 @@ namespace Notesplusplus
             base.OnAppearing();
             ListView.ItemsSource = await App.Database.GetNotesAsync();
         }
-        async void OnNoteAddedClicked(object sender, EventArgs e)
+
+        private async void OnNoteAddedClicked(object sender, EventArgs e)
         {
+            NotesEntryPage.Img = "";
             await Navigation.PushAsync(new NotesEntryPage
             {
-                BindingContext = new Note{IsNew = true, ImagePath = "Plus.png"}
+                BindingContext = new Note{IsNew = true, ImagePath = ""}
             });
         }
 
-        async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnListViewItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
             {
@@ -37,6 +39,11 @@ namespace Notesplusplus
                     BindingContext = e.SelectedItem as Note
                 });
             }
+        }
+
+        private async void Search(object sender, TextChangedEventArgs e)
+        {
+            await App.Database.GetNotesSearchAsync(e.NewTextValue);
         }
     }
 }

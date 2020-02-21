@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Notesplusplus.Database;
 using Notesplusplus.Models;
 using Plugin.FilePicker;
 using Plugin.FilePicker.Abstractions;
@@ -11,49 +12,89 @@ namespace Notesplusplus
     [XamlCompilation(XamlCompilationOptions.Compile)]
 public partial class NotesEntryPage : ContentPage
 {
+    public static string Img { get; set; }
+
     public NotesEntryPage()
     {
         InitializeComponent();
     }
 
-    async void OnSaveButtonClicked(object sender, EventArgs e)
+    
+    protected override void OnAppearing()
     {
-        var note = (Note) BindingContext;
-        note.ModificationTime = DateTime.Now;
-        if (note.IsNew)
+        base.OnAppearing();
+        if (Img.Equals(""))
         {
-            note.IsNew = false;
-            note.CreationTime = note.ModificationTime;
+            Add.IsEnabled = true;
+            Remove.IsEnabled = false;
         }
-        await App.Database.SaveNoteAsync(note);
-        await Navigation.PopAsync();
+        else
+        {
+            Add.IsEnabled = false;
+            Remove.IsEnabled = true;
+        }
+
+        ImageThinghy.Source = Img;
     }
-    async void OnDeleteButtonClicked(object sender, EventArgs e)
+
+    private async void OnSaveButtonClicked(object sender, EventArgs e)
+    {
+            try
+            {
+                var note = (Note)BindingContext;
+                note.ModificationTime = DateTime.Now;
+                if (note.IsNew)
+                {
+                    note.IsNew = false;
+                    note.CreationTime = note.ModificationTime;
+                }
+                await App.Database.SaveNoteAsync(note);
+                await Navigation.PopAsync();
+            }
+            catch (Exception f)
+            {
+                await DisplayAlert("Error", f.Message + "\n" + f.Source + "\n" + f.StackTrace, "OK");
+            }
+    }
+
+    private async void OnDeleteButtonClicked(object sender, EventArgs e)
     {
         var note = (Note) BindingContext;
         await App.Database.DeleteNoteAsync(note);
         await Navigation.PopToRootAsync();
     }
 
-    async void AddNewImage(object sender, EventArgs e)
+    private async void AddNewImage(object sender, EventArgs e)
     {
         try
         {
             var note = (Note) BindingContext;
-            FileData image = await CrossFilePicker.Current.PickFile(new[] {"image/*"});
-            string imagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UserImages");
+            var image = await CrossFilePicker.Current.PickFile(new[] {"image/*"});
+            var imagePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "UserImages");
             if (image != null)
             {
                 if (!Directory.Exists(imagePath))
                     Directory.CreateDirectory(imagePath);
                 File.WriteAllBytes(Path.Combine(imagePath, image.FileName), image.DataArray);
                 note.ImagePath = Path.Combine(imagePath, image.FileName);
+                Img = note.ImagePath;
             }
         }
-        catch (Exception f)
+        catch (Exception ev)
         {
-            await DisplayAlert("Error", f.Message + "\n" + f.Source + "\n" + f.StackTrace, "OK");
+            await DisplayAlert("Error", ev.Message + "\n" + ev.Source + "\n" + ev.StackTrace, "OK");
         }
+    }
+
+    private void RemoveImage(object sender, EventArgs e)
+    {
+        var note = (Note) BindingContext;
+        note.ImagePath = "";
+        Img = note.ImagePath;
+        ImageThinghy.Source = null;
+        ImageThinghy.Source = Img;
+        Add.IsEnabled = true;
+        Remove.IsEnabled = false;
     }
 }
 }

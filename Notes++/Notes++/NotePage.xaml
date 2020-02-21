@@ -10,19 +10,15 @@
         <Style TargetType="{x:Type Editor}">
             <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
         </Style>
-        <Style TargetType="Button" ApplyToDerivedTypes="True" CanCascade="True">
-            <Setter Property="FontSize" Value="Small"/>
-            <Setter Property="BackgroundColor" Value="LightGray"/>
-            <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="CornerRadius" Value="5"/>
-        </Style>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Edit" Clicked="OnEditClicked" ></ToolbarItem>
+        <ToolbarItem IconImageSource="delete.png" Clicked="OnDeleteClicked" />
+        <ToolbarItem IconImageSource="edit.png" Clicked="OnEditClicked" />
     </ContentPage.ToolbarItems>
-    <StackLayout>
-        <Image Aspect="AspectFit" Source="{Binding ImagePath}" />
-        <Editor Text="{Binding Text}"
-                HeightRequest="100" IsReadOnly="True" />
-    </StackLayout>
+    <ScrollView Orientation="Vertical">
+        <StackLayout>
+            <Image Aspect="AspectFit" Source="{Binding ImagePath}" />
+            <Label Text="{Binding Text}" />
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

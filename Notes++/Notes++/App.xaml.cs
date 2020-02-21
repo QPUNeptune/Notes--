@@ -9,18 +9,11 @@ namespace Notesplusplus
     {
         private static NotesDB database;
 
-        public static NotesDB Database
-        {
-            get
-            {
-                if (database == null)
-                {
-                    database = new NotesDB(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Notesplusplus.db3"));
-                }
+        public static NotesDB Database =>
+            database ?? (database = new NotesDB(Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Notesplusplus.db3")));
 
-                return database;
-            }
-        }
         public App()
         {
             InitializeComponent();

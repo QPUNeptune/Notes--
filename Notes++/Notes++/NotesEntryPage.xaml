@@ -10,24 +10,17 @@
         <Style TargetType="{x:Type Editor}">
             <Setter Property="BackgroundColor" Value="{StaticResource PageBackgroundColor}"/>
         </Style>
-        <Style TargetType="Button" ApplyToDerivedTypes="True" CanCascade="True">
-            <Setter Property="FontSize" Value="Small"/>
-            <Setter Property="BackgroundColor" Value="Black"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="CornerRadius" Value="5"/>
-        </Style>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnDeleteButtonClicked" IconImageSource="delete.png" />
+        <ToolbarItem Clicked="OnSaveButtonClicked" IconImageSource="save.png" />
+        <ToolbarItem x:Name="Add" Clicked="AddNewImage" IsEnabled="{Binding}" IconImageSource="img_add.png" />
+        <ToolbarItem x:Name="Remove" Clicked="RemoveImage" IsEnabled="{Binding}" IconImageSource="img_rem.png" />
+    </ContentPage.ToolbarItems>
     <StackLayout>
-        <ImageButton Source="{Binding ImagePath}" Clicked="AddNewImage" Aspect="AspectFit" WidthRequest="100"/>
+        <Image x:Name="ImageThinghy" Source="{Binding ImagePath}" Aspect="AspectFit" HeightRequest="250" />
         <Entry Text="{Binding Title}"
                Placeholder="Title" />
-        <Editor Text="{Binding Text}"
-                Placeholder="Write your note..."
-                HeightRequest="100" />
-        
-        <Grid>
-            <Button Text="Save" Clicked="OnSaveButtonClicked" />
-            <Button Grid.Column="1" Text="Delete" Clicked="OnDeleteButtonClicked" />
-        </Grid>
+        <Editor Text="{Binding Text}" Placeholder="Write your note..."/>
     </StackLayout>
 </ContentPage>
